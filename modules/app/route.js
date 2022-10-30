@@ -1,8 +1,19 @@
-var { Router } = require("exprango");
-var router = new Router( );
+const exprango = require("exprango");
+const Router = new exprango.Router( );
+const path = require("path");
+const handlebars = require("handlebars");
 
-router.get("/", ( req, res ) => {
-  res.send("Hello figer");
+Router.setView( "engine", handlebars );
+Router.setView( "view", path.join( __dirname, "views" ));
+Router.setView( "layout", path.join( __dirname, "views", "layout" ) );
+Router.setView( "ext", ".hbs" );
+
+Router.get("/", (req, res) => {
+  res.render("index");
 });
 
-module.exports = router;
+Router.get("/layout", ( req, res ) => {
+  res.render( "index", { layout: "main" } );
+})
+
+module.exports = Router;
