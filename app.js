@@ -34,11 +34,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req,res, next) => {
   // check if is under /app, if not, redirect to /app
-  if(req.path.indexOf("/app") != 0){
+  if( req.path == "/" ){
     res.redirect("/app");
   }else{
-    next();
+    next( );
   }
+  // if(req.path.indexOf("/app") != 0){
+  //   res.redirect("/app");
+  // }else{
+  //   next();
+  // }
 });
 
 app.modular( "app", appConfig );
